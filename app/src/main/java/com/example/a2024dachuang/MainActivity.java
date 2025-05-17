@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             //ModelInference modelInference = new ModelInference(this, "avg_bst_jit.pt");
 
-            model = new TSEModel_2spk(this, "avg_bst_verysmall3.onnx", new AudioManager.ModelStateListener() {
+            model = new TSEModel_2spk(this, "v3_16000.onnx", new AudioManager.ModelStateListener() {
                 @Override
                 public void updateStatusText(String text) {
                     TextView view = findViewById(R.id.modelInfoText);

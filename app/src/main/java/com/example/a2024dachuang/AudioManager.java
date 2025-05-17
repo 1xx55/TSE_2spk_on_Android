@@ -1,5 +1,8 @@
 package com.example.a2024dachuang;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -87,11 +90,23 @@ public class AudioManager {
                 currentChannels = channels;
                 currentEncoding = encoding;
 
-                Log.d(TAG,"转换成功 :长度" + samples.length);
-                Log.d(TAG,"前几项" + Arrays.toString(Arrays.copyOfRange(samples, 0, 10)));
-                Log.d(TAG,"samplesRate:" + sampleRate);
-                Log.d(TAG,"channels:" + channels);
-                Log.d(TAG,"encoding:" + encoding);
+                // 输入归一化
+                float absmx = 0.000001f;
+                int zerocnt = 0;
+                for(int i=0;i<samples.length;i++){
+                    absmx = max(absmx,abs(samples[i]));
+                }
+                for(int i=0;i<samples.length;i++){
+                    samples[i] = samples[i] / absmx;
+                    if(abs(samples[i])<1e-8) zerocnt++;
+                }
+
+                Log.d(TAG, "转换成功 :长度" + samples.length);
+                Log.d(TAG, "前几项" + Arrays.toString(Arrays.copyOfRange(samples, 0, 200)));
+                Log.d(TAG, "samplesRate:" + sampleRate);
+                Log.d(TAG, "channels:" + channels);
+                Log.d(TAG, "encoding:" + encoding);
+                Log.d(TAG, "转换数据中0的个数" + zerocnt);
 
 
                 modelStateListener.updateStatusText("转换样本长度：" + samples.length);

@@ -24,7 +24,7 @@ public class FileUtils {
         File file = new File(context.getFilesDir(), fileName);
         try (InputStream inputStream = context.getResources().openRawResource(resId);
              FileOutputStream outputStream = new FileOutputStream(file)) {
-            byte[] buffer = new byte[64*1024*1024]; //64MB
+            byte[] buffer = new byte[1024]; //64MB
             int length;
             while ((length = inputStream.read(buffer)) > 0) {
                 outputStream.write(buffer, 0, length);

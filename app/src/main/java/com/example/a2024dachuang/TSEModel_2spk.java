@@ -23,6 +23,8 @@ public class TSEModel_2spk
     private final Handler uiHandler = new Handler(Looper.getMainLooper());
     private final Integer model_count = 1;
 
+    private int chunkSize = 16000;
+
     private ONNXModelInference[] tsemodels = new ONNXModelInference[model_count];
     private final AudioManager.ModelStateListener modelStateListener;
     public AudioManager inputManager, embed1Manager, embed2Manager, output1Manager,output2Manager;
@@ -170,7 +172,7 @@ public class TSEModel_2spk
             }
 
             // === 分块推理 ===
-            int chunkSize = 16000;  // 比如每1秒是16000点
+            // 比如每1秒是16000点
             int totalChunks = (input_sample.length + chunkSize - 1) / chunkSize;  // 保证不丢最后一点
 
             float[] emb1 = embed1Manager.getCurrentSamples();

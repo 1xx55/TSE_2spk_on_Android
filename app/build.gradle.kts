@@ -54,4 +54,5 @@ dependencies {
     // ONNXRuntime 依赖
     implementation("com.microsoft.onnxruntime:onnxruntime-android:latest.release")
     implementation("com.microsoft.onnxruntime:onnxruntime-extensions-android:latest.release")
+
 }
